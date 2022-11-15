@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AskMe!</title>
+
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="../static/css/style.css" rel="stylesheet">
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+    <header>
+  <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand margin-l20" href="#">AskMe!</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
+            <form class="d-flex" role="search" >
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </form>
+            <button class="btn btn-outline-success me-2 margin-l50" type="button">Ask</button>
+          </div>
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Log in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Register</a>
+          </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1>New questions</h1>
+        <div class="row">
+            <div class="col-8">
+                <div >
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="question-avatar">
+                                <img src="../static/img/image.jpeg" alt="" />
+                            </div>
+                            <form class="voting">
+                                <span class="vote-count">5</span>
+                                <button type="button" class="btn btn-light">↑</button>
+                            </form>
+                        </div>
+                        <div class="col-8">
+                            <h2 class="question-title"> Question 1</h2>
+                            <div class="question-text margin-b20">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, illum dolores fuga iure aut repellat debitis quia facilis iusto modi!
+                            </div>
+                            <div class="question-tags">
+                                Tags:
+                                <a href="#">Tag1</a>
+                                <a href="#">Tag2</a>
+                                <a href="#">Tag3</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="avatar">
+                                <img src="../static/img/image2.jpeg" alt="" />
+                                
+                            </div>
+                            <form class="voting">
+                                <span class="vote-count">4</span>
+                                <button type="button" class="btn btn-light">↑</button>
+                            </form>
+                        </div>
+                        <div class="col-10">
+                            <h2 class="question-title"> Answer 1</h2>
+                            <div class="question-text margin-b20">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, illum dolores fuga iure aut repellat debitis quia facilis iusto modi!
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" checked disabled>
+                                <label class="form-check-label" for="exampleCheck1">Correct</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="avatar">
+                                <img src="../static/img/image3.jpeg" alt="" />
+                            </div>
+                            <form class="voting">
+                                <span class="vote-count">3</span>
+                                <button type="button" class="btn btn-light">↑</button>
+                            </form>
+                        </div>
+                        <div class="col-10">
+                            <h2 class="question-title"> Answer 2</h2>
+                            <div class="question-text margin-b20">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, illum dolores fuga iure aut repellat debitis quia facilis iusto modi!
+                            </div>
+                             <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" disabled>
+                                <label class="form-check-label" for="exampleCheck1">Correct</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                  <div class="populartaglist">
+                    <h3>Popular Tags</h3>
+                      <a href="#">tag1</a>
+                      <a href="#">tag2</a>
+                      <a href="#">tag3</a>
+                  </div>
+                  <div class="bestuserlist">
+                    <h4>Best Members</h4>
+                    <ul>
+                     <li><a href="#">User 1</a></li>
+                     <li><a href="#">User 2</a></li>
+                     <li><a href="#">User 3</a></li>
+                    </ul>
+                  </div>
+                </div>
+              <div class="col-2"></div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Copyright AskMe! 2022. All rights reserved.</span>
+  </div>
+</footer>      
+  </body>
+</html>
