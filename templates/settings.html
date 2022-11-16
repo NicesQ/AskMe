@@ -1,0 +1,43 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Account settings</h1>
+{% include 'inc/code_after_title.html' %}
+<div class="d-flex align-items-start py-3 border-bottom">
+    <div class="pl-sm-4 pl-2" id="img-section">
+        <h3>Profile Photo</h3>
+        <div class="question-avatar mb-3">
+            <img src="{% static "img/image.jpeg" %}" alt="" />
+        </div>
+        <button class="btn btn-primary border"><b>Upload new photo</b></button>
+    </div>
+</div>
+<div class="py-2">
+    <div class="row py-2">
+        <div class="col-md-6">
+            <label for="login">Login</label>
+            <input type="text" class="bg-light form-control" placeholder="example_login">
+        </div>
+        <div class="col-md-6 pt-md-0 pt-3">
+            <label for="nickname">Nickname</label>
+            <input type="text" class="bg-light form-control" placeholder="Mr. Example">
+        </div>
+    </div>
+    <div class="row py-2">
+        <div class="col-md-6">
+            <label for="email">Email Address</label>
+            <input type="text" class="bg-light form-control" placeholder="example@example.com">
+        </div>
+    </div>
+    <div class="py-3 pb-4 border-bottom">
+        <button class="btn btn-primary mr-3">Save Changes</button>
+        <button class="btn border button">Cancel</button>
+    </div>
+    <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+        <div class="ml-auto">
+            <h5 class="mb-3">Delete your account</h5>
+            <button class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

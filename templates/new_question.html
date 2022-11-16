@@ -1,0 +1,21 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Create new question</h1>
+{% include 'inc/code_after_title.html' %}
+<div class="mb-2">
+    <label for="questionTitle" class="form-label">Question title</label>
+    <input type="text" class="form-control" id="questionTitleInput" placeholder="Enter question title here">
+</div>
+<div class="mb-2">
+    <label for="questionText" class="form-label">Question text</label>
+    <textarea class="form-control" id="questionTextInput" rows="5"placeholder="Enter question text here"></textarea>
+</div>
+<div class="mb-2">
+    <label for="questionTags" class="form-label">Question tags</label>
+    <input type="text" class="form-control" id="questionTagsInput" placeholder="tag1, tag2, tag3, ...">
+</div>
+<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+    <button type="button" class="btn btn-success btn-lg">Create new question</button>
+</div>
+{% endblock %}
