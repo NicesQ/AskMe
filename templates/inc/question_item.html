@@ -3,7 +3,11 @@
   <div class="row">
     <div class="col-2">
       <div class="avatar">
-        <img src="{% static "img/image.jpeg" %}" alt="" />
+        <img src="{{ question.author.avatar.url }}" alt="" />
+      </div>
+      <div class="voting">
+        <span class="vote-count">{{question.get_likes}}</span>
+        <button type="button" class="btn btn-light">↑</button>
       </div>
     </div>
     <div class="col-10">
@@ -15,7 +19,7 @@
       </div>
       <div class="row">
         <div class="col-4 answers-count">
-          <a href="{% url 'question' question_id=question.id %}">answers({{ question.answers_number}})</a>
+          <a href="{% url 'question' question_id=question.id %}">answers({{ question.answers.count}})</a>
         </div>
         <div class="col-4"></div>
         <div class="col-4">

@@ -6,10 +6,10 @@
   <div class="row">
     <div class="col-4">
       <div class="question-avatar">
-        <img src="{% static 'img/image.jpeg' %}" alt="" />
+        <img src="{{ question.author.avatar.url }}" alt="" />
       </div>
       <form class="voting">
-        <span class="vote-count">5</span>
+        <span class="vote-count">{{ question.get_likes }}</span>
         <button type="button" class="btn btn-light">↑</button>
       </form>
     </div>
@@ -25,7 +25,7 @@
   </div>
 </div>
 <h1>Answers</h1>
-{% for answers in question %}
+{% for answer in answers %}
   {% include 'inc/answer_item.html' %}
 {% endfor %}
 {% if request.user.is_authenticated %}
