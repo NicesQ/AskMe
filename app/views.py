@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 
-from app.forms import LoginForm, RegistrationForm, SettingsForm, NewQuestionForm
+from app.forms import LoginForm, RegistrationForm, SettingsForm, NewQuestionForm, NewAnswerForm
 from . import models
 from app.models import Question, Answer, Tag, Profile, Like
 
@@ -27,7 +27,7 @@ def index(request):
 
     return render(request, 'index.html', context=context)
 
-
+@require_http_methods(['GET','POST'])
 def question(request, question_id: int):
     if question_id > models.Question.objects.count():
         return render(request, '404.html')
@@ -36,7 +36,23 @@ def question(request, question_id: int):
         best_users = models.Profile.objects.top_profiles()
         question_item = models.Question.objects.get(id = question_id)
         answers = models.Answer.objects.ordered_answers(question_id)
+        if request.method == 'GET':
+            form = NewAnswerForm(request.user, question_item)
+        if request.method == 'POST':
+            form = NewAnswerForm(request.user, request.POST)
+            if form.is_valid():
+                answer = form.save()
+                if answer:  
+                    answer.user = request.user
+                    answer.question = question_item.id
+                    answer.save()
+                    zero_like = models.Like.objects.create(content_type = ContentType.objects.get_for_model(Answer), value = 0, owner = request.user, object_id = answer.id)
+                    return redirect(reverse('question') + question_id)
+                else:
+                    form.add_error(field=None,error="Something wrong!")
+            
         context = {
+            'form' : form,
             'popular_tags': popular_tags,
             'best_users': best_users,
             'question': question_item,
@@ -91,7 +107,7 @@ def register(request):
                 profile = models.Profile.objects.create(owner=user)
                 return redirect(reverse('index'))
             else:
-                user_form.add_error(field=None,error="Wrong username or password!")
+                user_form.add_error(field=None,error="Something wrong!")
     context = {
         'form': user_form,
         'popular_tags': popular_tags,
@@ -105,23 +121,16 @@ def new_question(request):
     popular_tags = models.Tag.objects.popular_tags()
     best_users = models.Profile.objects.top_profiles()
     if request.method == 'GET':
-        form = NewQuestionForm()
+        form = NewQuestionForm(request.user)
     if request.method == 'POST':
-        form = NewQuestionForm(request.POST)
+        form = NewQuestionForm(request.user, request.POST)
         if form.is_valid():
             question = form.save()
             if question:  
-                question.user = request.user
-                question.save()
                 zero_like = models.Like.objects.create(content_type = ContentType.objects.get_for_model(Question), value = 0, owner = request.user, object_id = question.id)
-                context = {
-                    'popular_tags': popular_tags,
-                    'best_users': best_users,
-                    'question': question,
-                }
-                return render(request,'question.html',context=context)
+                return redirect(reverse('question') + question.id)
             else:
-                form.add_error(field=None,error="Wrong username or password!")
+                form.add_error(field=None,error="Something wrong!")
     context = {
         'form': form,
         'popular_tags': popular_tags,

@@ -1,5 +1,6 @@
 {% extends 'inc/base.html' %}
 {% load static %}
+{% load bootstrap5 %}
 {% block content %}
 {%include 'inc/code_after_title.html'%}
 <div>
@@ -30,11 +31,13 @@
 {% endfor %}
 {% if request.user.is_authenticated %}
   <div class="row">
-    <div class="mb-3">
-      <label for="questionTextArea" class="form-label">Create a new answer</label>
-      <textarea placeholder="Enter your answer here" class="form-control" id="questionTextArea"></textarea>
-    </div>
-    <button type="submit" class="btn btn-success col-2 mb-5 btn-answer">Answer</button> 
+    <form action="{% url 'question' question_id=question.id %}" method="post">
+      <div class="mb-3">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+      </div>
+      <button type="submit" class="btn btn-success col-2 mb-5 btn-answer">Answer</button>
+    </form>
   </div>
 {% else %}
   <div class="row">

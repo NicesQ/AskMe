@@ -61,14 +61,36 @@ class NewQuestionForm(forms.ModelForm):
     class Meta:
         model = models.Question
         fields = ('title','text','tags')
-        
+    
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(NewQuestionForm, self).__init__(*args, **kwargs)
+          
     def save(self):
         tag_names = self.cleaned_data['tags']
         tags = []
         for tag_name in tag_names:
             tag, created = models.Tag.objects.get_or_create(value=tag_name)
             tags.append(tag)
-        question = models.Question.objects.create(title=self.cleaned_data['title'], text=self.cleaned_data['text'])
+        question = models.Question.objects.create(title=self.cleaned_data['title'], text=self.cleaned_data['text'], author=self.user)
         for tag in tags:
             question.tags.add(tag)
         return question
+    
+    
+class NewAnswerForm(forms.ModelForm):
+    title = forms.CharField(min_length=6,max_length=255)
+    text = forms.CharField(min_length=25, widget=forms.Textarea)
+    
+    class Meta:
+        model = models.Answer
+        fields = ('title','text')
+
+    def __init__(self, user, question, *args, **kwargs):
+        self.user = user
+        self.question = question
+        super(NewAnswerForm, self).__init__(*args, **kwargs)
+ 
+    def save(self):
+        answer = models.Answer.objects.create(title=self.cleaned_data['title'], text=self.cleaned_data['text'], author=self.user, question=self.question)
+        return answer

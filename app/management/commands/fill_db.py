@@ -70,7 +70,7 @@ class Command(BaseCommand):
             tags_count = random.randint(1, 6)
             for j in range(tags_count):
                 tags.append(random.choice(Tag.objects.all()))
-            questions[i].tags.add(*tags[:tags_count])
+            questions[i].tags.add(tags)
 
 
     def create_answers(self, count : int):
@@ -103,6 +103,18 @@ class Command(BaseCommand):
         Like.objects.bulk_create(answers_likes)
 
 
+    def create_technical_likes_for_questions(self):
+        questions = Question.objects.all()
+        for question in questions:
+            Like.objects.create(content_type = ContentType.objects.get_for_model(Question), value = 0, owner = question.author, object_id = question.id)
+    
+    
+    def create_technical_likes_for_answers(self):
+        answers = Answer.objects.all()
+        for answer in answers:
+            Like.objects.create(content_type = ContentType.objects.get_for_model(Answer), value = 0, owner = answer.author, object_id = answer.id)        
+        
+        
     def handle(self, *args, **options):
         retio = None
         if options['ratio']:
@@ -117,3 +129,5 @@ class Command(BaseCommand):
         self.create_answers(ratio * ANSWERS_COUNT)
         self.create_questions_likes(int(ratio * VOTES_COUNT / 2))
         self.create_answers_likes(int(ratio * VOTES_COUNT / 2))
+        self.create_technical_likes_for_questions()
+        self.create_technical_likes_for_answers()
